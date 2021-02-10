@@ -1,0 +1,14 @@
+import ru.ifmo.se.pokemon.*;
+
+public class Battleground {
+	public static void main(String[] args) {
+		Battle b = new Battle();
+		b.addAlly(new Keldeo("Keldeo", 2)); 
+        b.addAlly(new Stunky("Stunky", 1)); 
+        b.addAlly(new Skuntank("Skuntank", 3)); 
+        b.addFoe(new Swinub("Swinub", 2)); 
+        b.addFoe(new Piloswine("Piloswine", 3)); 
+        b.addFoe(new Mamoswine("Mamoswine", 2)); 
+        b.go(); 
+	}
+}
