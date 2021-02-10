@@ -1,0 +1,50 @@
+import ru.ifmo.se.pokemon.*;
+
+public class Stunky extends Pokemon{
+	public Stunky(String name, int lvl) {
+		super(name,lvl);
+		setStats(63,63,47,41,41,74);
+		setType(Type.POISON, Type.DARK);
+		setMove(new Rest(), new Venoshock(), new SludgeBomb());
+	}
+}
+
+	class Rest extends StatusMove{
+		public Rest() { super(Type.PSYCHIC, 0, 0); }
+		
+		@Override 
+        protected boolean checkAccuracy(Pokemon att, Pokemon def) { 
+            return true; 
+        }
+		
+		@Override
+        protected void applySelfEffects(Pokemon p) { 
+            p.setMod(Stat.HP,-100); 
+            Effect.sleep(p); 
+        } 
+	}
+	
+	class Venoshock extends SpecialMove{
+		public Venoshock() { super(Type.POISON, 65, 1.0); }
+		
+		@Override
+ 		protected void applyOppDamage(Pokemon def, double damage) {
+ 			Status PokCon = def.getCondition();
+ 			if(PokCon == Status.POISON) {
+ 				def.setMod(Stat.HP, (int)Math.round(damage*2));
+ 			}
+ 			else {
+ 				def.setMod(Stat.HP, (int)Math.round(damage));
+ 			}
+ 		}
+	}
+	
+	class SludgeBomb extends SpecialMove{
+		public SludgeBomb() { super(Type.POISON, 90, 1.0); }
+		
+		protected void applyOppEffects (Pokemon p) { 
+            if (Math.random() < 0.3){ 
+                Effect.poison(p); 
+            } 
+		}
+	}
