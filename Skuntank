@@ -1,0 +1,19 @@
+import ru.ifmo.se.pokemon.*;
+
+public class Skuntank extends Stunky{
+	public Skuntank(String name, int lvl) {
+		super(name,lvl);
+		setStats(103,93,67,71,61,84);
+		setMove(new Rest(), new Venoshock(), new SludgeBomb(), new PoisonJab());
+	}
+}
+	
+	class PoisonJab extends PhysicalMove{
+		public PoisonJab() { super(Type.POISON, 80, 1.0); }
+		
+		protected void applyOppEffects (Pokemon p) { 
+            if (Math.random() < 0.3){ 
+                Effect.poison(p); 
+            } 
+		}
+	}
