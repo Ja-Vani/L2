@@ -1,0 +1,55 @@
+import ru.ifmo.se.pokemon.*;
+
+
+public class Keldeo extends Pokemon{
+	public Keldeo(String name, int lvl) {
+		super(name,lvl);
+		setStats(91,72,90,129,90,108);
+		setType(Type.WATER, Type.FIGHTING);
+		setMove(new Swagger(), new Leer(), new CalmMind(), new Confide());
+	}	
+}
+
+	class Swagger extends StatusMove{
+		public Swagger () { super(Type.NORMAL,0,0.85); }
+		
+		@Override 
+	    protected void applyOppEffects(Pokemon p){ 
+	    p.setMod(Stat.ATTACK, 2); 
+	    Effect.confuse(p); 
+		}
+	}
+	
+	class Leer extends StatusMove{
+		public Leer(){ super(Type.NORMAL, 0, 100); } 
+		
+	    @Override 
+	    protected void applyOppEffects(Pokemon p){ 
+	        p.setMod(Stat.ATTACK, -1); 
+	    } 
+	}
+	
+	class CalmMind extends StatusMove{
+		public CalmMind () { super(Type.PSYCHIC,0,0); }
+		
+		@Override 
+        protected boolean checkAccuracy(Pokemon att, Pokemon def) { 
+            return true; 
+        } 
+
+		@Override
+        protected void applySelfEffects(Pokemon p) { 
+            p.setMod(Stat.SPECIAL_ATTACK,1); 
+            p.setMod(Stat.SPECIAL_DEFENSE,1); 
+        } 
+	}
+	
+	class Confide extends StatusMove{
+		protected Confide(){ 
+	        super(Type.NORMAL, 0, 0); 
+	    } 
+	    @Override 
+	    protected void applyOppEffects(Pokemon p){ 
+	        p.setMod(Stat.SPECIAL_ATTACK, -1); 
+	    } 
+	}
