@@ -1,0 +1,19 @@
+import ru.ifmo.se.pokemon.*;
+
+public class Mamoswine extends Piloswine{
+	public Mamoswine(String name, int lvl) {
+		super(name,lvl);
+		setStats(110,130,80,70,60,80);
+		setMove(new Facade(), new Bulldoze(), new IcyWind(), new IceBeam());
+	}
+}
+
+	class IceBeam extends SpecialMove{
+		 public IceBeam() { super(Type.ICE,90,1.0); } 
+		 
+	        protected void applyOppEffects (Pokemon p) { 
+	            if (Math.random() < 0.1){ 
+	                Effect.freeze(p); 
+	            } 
+	        } 
+	}
