@@ -1,0 +1,34 @@
+import ru.ifmo.se.pokemon.*;
+
+public class Swinub extends Pokemon{
+	public Swinub(String name, int lvl) {
+		super(name,lvl);
+		setStats(50,50,40,30,30,50);
+		setType(Type.ICE, Type.GROUND);
+		setMove(new Facade(), new Bulldoze());
+	}
+}
+ 	class Facade extends PhysicalMove {
+ 		public Facade() {super(Type.NORMAL, 70, 1.0);}
+ 		
+ 		@Override
+ 		protected void applyOppDamage(Pokemon def, double damage) {
+ 			Status PokCon = def.getCondition();
+ 			if(PokCon == Status.BURN || PokCon == Status.POISON || PokCon == Status.PARALYZE) {
+ 				def.setMod(Stat.HP, (int)Math.round(damage*2));
+ 			}
+ 			else {
+ 				def.setMod(Stat.HP, (int)Math.round(damage));
+ 			}
+ 		}
+ 	}
+ 	
+ 	class Bulldoze extends PhysicalMove{
+ 		public Bulldoze() {super(Type.NORMAL, 60, 1.0);}
+ 		
+ 		@Override
+ 		protected void applyOppDamage(Pokemon def, double damage) {
+ 			def.setMod(Stat.HP, (int)Math.round(damage));
+ 			def.setMod(Stat.SPEED, -1);
+ 		}
+ 	}
